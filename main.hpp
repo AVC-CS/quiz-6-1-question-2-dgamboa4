@@ -8,9 +8,18 @@ int writeFile(string filename) {
     cout << "enter number of employees: ";
     cin >> numEmployees;
 
+    do {
+        cout << "enter number of employees (positive number): ";
+        cin >> numEmployees;
+        if (numEmployees <= 0) {
+            cout << "invalid input! enter positive number. " << endl;
+        }
+    } while (numEmployees <= 0);
+
     ofstream file(filename);
     if (!file.is_open()) {
         cerr << "error: could not open file for writing. " << endl;
+        return 0;
     }
 
     file << numEmployees << endl;
@@ -20,9 +29,9 @@ int writeFile(string filename) {
         double empSalary;
 
         cout << "enter employee id, name, department, and salary. ";
-        cin >> empID, empName, empDept< empSalary;
+        cin >> empID >> empName >> empDept >> empSalary;
 
-        file << empid << " " << empName << " " << empDept << " " << empSalary << endl;
+        file << empID << " " << empName << " " << empDept << " " << empSalary << endl;
     }
     file.close();
     return numEmployees;
