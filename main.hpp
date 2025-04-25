@@ -1,34 +1,30 @@
 #include <iostream>
 #include <fstream>
-#include <iomanip>
+#include <string>
 using namespace std;
 
-int main()
-{
-    ifstream ifs;
-
-    ifs.open("employee.txt");
-    if (!ifs)
-    {
-        cout << "File Open Error\n";
-        exit(0);
-    }
-
+int writeFile(string filename) {
     int numEmployees;
-    ifs >> numEmployees;
-    cout << "ID\t\tName\t\tDepartment\tSalary" << endl;
+    cout << "enter number of employees: ";
+    cin >> numEmployees;
 
-    int id;
-    string name, department;
-    double salary, totalSalary = 0;
-
-    while (ifs >> id >> name >> department >> salary) {
-        cout << id << "\t\t" << name << "\t\t" << department << "\t\t" << salary << endl;
-        totalSalary += salary;
+    ofstream file(filename);
+    if (!file.is_open()) {
+        cerr << "error: could not open file for writing. " << endl;
     }
 
-    ifs.close();
-    cout << "Total: " << totalSalary << "Avg: " << totalSalary / numEmployees << endl;
+    file << numEmployees << endl;
+    for (int i = 0; i < numEmployees; i++) {
+        int empID;
+        string empName, empDept;
+        double empSalary;
 
-    
+        cout << "enter employee id, name, department, and salary. ";
+        cin >> empID, empName, empDept< empSalary;
+
+        file << empid << " " << empName << " " << empDept << " " << empSalary << endl;
+    }
+    file.close();
+    return numEmployees;
 }
+
